@@ -11,9 +11,11 @@ Installation
 3. Open Terminal.app
 4. Enter the following commands:
 
-> chmod +x /usr/local/bin/SpotifyNowPlayingAgent
-
-> launchctl load -w ~/Library/LaunchAgents/com.spotify.NowPlayingAgent.plist
+        defaults write com.Growl.GrowlHelperApp GrowlLoggingEnabled -int 1
+        sudo killall GrowlHelperApp
+        open ~/Library/PreferencePanes/Growl.prefPane/Contents/Resources/GrowlHelperApp.app
+        chmod +x /usr/local/bin/SpotifyNowPlayingAgent
+        launchctl load -w ~/Library/LaunchAgents/com.spotify.NowPlayingAgent.plist
 
 Credits
 ---------
