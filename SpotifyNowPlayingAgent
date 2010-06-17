@@ -1,0 +1,27 @@
+#!/bin/bash
+
+## NOTE: run the following once!
+
+# defaults write com.Growl.GrowlHelperApp GrowlLoggingEnabled -int 1
+# sudo killall GrowlHelperApp
+# open ~/Library/PreferencePanes/Growl.prefPane/Contents/Resources/GrowlHelperApp.app
+
+syslog -F '$(Message)' -E vis -d -w 1 -k Sender GrowlHelperApp | while read song; do
+    if [[ "$song" =~ "Spotify" ]]; then read song2;
+            echo "$song + $song2" | perl -ne 'if (/Spotify: ([^(]+) \((.*?)\)/) { print "$1 ($2 $3)\n";}' > /tmp/spotify.current
+       	    
+       	    STATUSMSG=`echo "$song)" | perl -ne 'if (/Spotify: ([^(]+) \((.*?)\)/) { print "$1 - $2\n";}'`
+       	    ICHATPID=$(ps axc|awk "{if (\$5==\"iChat\") print \$1}")
+       	    ADIUMPID=$(ps axc|awk "{if (\$5==\"Adium\") print \$1}")
+       	    
+       	    if [ "$ICHATPID" != "" ]; then
+       	        echo "tell application \"iChat\" to set the status message to \"$STATUSMSG\"" | osascript
+       	    fi
+       	    
+       	    if [ "$ADIUMPID" != "" ]; then
+       	        echo "tell application \"Adium\" to set status message of every account to \"$STATUSMSG\"" | osascript
+       	    fi
+    fi
+done
+
+exit
