@@ -1,16 +1,15 @@
  Spotify Now Playing Agent
 ====================================
 
-This script utilizes Growl diagnostic messages to capture song change notifications and writes the new song metadata to a file in /tmp as well as setting iChat or Adium's status message if they are running.
+This script utilizes Growl diagnostic messages to capture song change notifications and writes the new song metadata to a file in /tmp/spotify.current for scripting purposes. The script will also set the iChat or Adium's status message if you are running one of them.
 
 Installation
 -------------
 
-1. Move com.spotify.NowPlayingAgent.plist to ~/Library/LaunchAgents
-2. Copy SpotifyNowPlayingAgent to /usr/local/bin/
+1. Move com.spotify.NowPlayingAgent.plist to ~/Library/LaunchAgents/
+2. Move SpotifyNowPlayingAgent to /usr/local/bin/
 3. Open Terminal.app
 4. Enter the following commands:
-
         defaults write com.Growl.GrowlHelperApp GrowlLoggingEnabled -int 1
         sudo killall GrowlHelperApp
         open ~/Library/PreferencePanes/Growl.prefPane/Contents/Resources/GrowlHelperApp.app
