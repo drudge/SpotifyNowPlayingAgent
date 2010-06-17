@@ -12,6 +12,7 @@ Installation
 4. Enter the following commands:
 
 > chmod +x /usr/local/bin/SpotifyNowPlayingAgent
+
 > launchctl load -w ~/Library/LaunchAgents/com.spotify.NowPlayingAgent.plist
 
 Credits
